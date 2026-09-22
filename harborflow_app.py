@@ -296,8 +296,6 @@ def weekly_report(deliveries, target):
         if delivery >= target:
             days_meeting_target += 1
 
-    # print(f"Completed deliveries: {deliveries}")
-    # print(f"Daily target: {target}")
     print("WEEKLY DISPATCH REPORT")
     print(f"Total deliveries: {total}")
     print(f"Average per day: {average:.2f}")
