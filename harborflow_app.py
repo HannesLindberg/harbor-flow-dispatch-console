@@ -63,9 +63,6 @@ def main():
     The cases are where the programs will be called. its based on the programs id.
     """
 
-    clear()
-    clear()
-
     run = True
     while run:
         program_id = get_number("""
@@ -80,29 +77,20 @@ def main():
         8. Compare service scenarios
         Select service: """, "Error - Select a service from 1 to 8.", int, 1, 8)
 
+        clear()
+        print(f"{program_id}.")
+
         match program_id:
             case 1:
-                clear()
                 print("Console closed. Dispatch data remains safe.")
                 run = False
             case 2:
-                clear()
-                print("2. Validate booking reference")
-                print("______________________________")
-                print("")
-
                 booking_reference = input("Booking reference: ")
                 normalized_reference = validate_reference(booking_reference)
                 print(normalized_reference)
             case 3:
-                clear()
-                print("3. Calculate delivery quote")
-                print("____________________________")
-                print("")
-
                 distance = get_number("Distance (km): ", "Error - Value must be greater than zero.")
                 weight = get_number("Weight (kg): ", "Error - Value must be greater than zero.")
-
                 service_code = input("Service Code: ").upper()
                 while service_code != "X" and service_code != "S" and service_code != "P":
                     print("")
@@ -112,63 +100,32 @@ def main():
 
                 consolidate_delivery_quote(distance, weight, service_code)
             case 4:
-                clear()
-                print("4. Consolidate parcel labels")
-                print("_____________________________")
-                print("")
-
-                lable = input("Label: ")
-                consolidate_parcel_labels(lable)
+                labels = input("Scanned labels: ")
+                consolidate_parcel_labels(labels)
             case 5:
-                clear()
-                print("5. Check van capacity")
-                print("______________________")
-                print("")
-
                 van_cap = get_number(
-                    "Van capacity: ", 
+                    "Van capacity (kg): ", 
                     "Error - Value must be greater than zero.")
                 parecel_weights = get_number_list(
-                    "Enter parcel weights separated by commas: ", 
+                    "Parcel weights (kg): ", 
                     "Error - Enter valid numbers separated by commas.")
 
                 check_van_capacity(van_cap, parecel_weights)
             case 6:
-                clear()
-                print("6. Classify service performance")
-                print("________________________________")
-                print("")
-
                 promised_minutes = get_number("Promised minutes: ", "Error - Value must be greater than zero.")
                 actual_minutes =  get_number("Actual minutes: ", "Error - Value must be greater than zero.")
                 damaged_parcels =  get_number("Damaged parcels: ", "Error - Value must be greater than zero.", int)
 
                 delay, status = classify_service_performance(promised_minutes, actual_minutes, damaged_parcels)
 
-                print(f"Promised minutes: {promised_minutes}")
-                print(f"Actual minutes: {actual_minutes}")
-                print(f"Damaged parcels: {damaged_parcels}")
-
-                clear()
-
                 print(f"Delay: {delay} minutes")
                 print(f"Service status: {status}")
             case 7:
-                clear()
-                print("7. Produce weekly dispatch report")
-                print("__________________________________")
-                print("")
-
                 delivery_count = get_number_list("Completed deliveries: ", "Error - Weekly report requires 7 delivery counts.", int, count=7)
                 target = get_number("Daily target: ", "Error - Value must be greater than zero.", int)
 
                 weekly_report(delivery_count, target)
             case 8:
-                clear()
-                print("8. Compare service scenarios")
-                print("_____________________________")
-                print("")
-
                 distance = get_number("Distance (km): ", "Error - Value must be greater than zero.")
                 weight= get_number("Weight (kg): ", "Error - Value must be greater than zero.")
 
@@ -205,17 +162,11 @@ def validate_reference(reference):
 # service_code (string): either "S", "X" or "P"
 #
 # Prints the delivery quote
-
-
 def calculate_delivery_quote(distance, weight, service_multiplier):
     subtotal = 45.00 + (distance * 6.50) + (weight * 4.00)
     return subtotal * service_multiplier
 
-
 def consolidate_delivery_quote(distance, weight, service_code):
-
-    clear()
-
     # Determine service type and multiplier
     if service_code == "S":
         service_multiplier = 1.0
@@ -227,12 +178,6 @@ def consolidate_delivery_quote(distance, weight, service_code):
     # Calculate the delivery quote
     quote = calculate_delivery_quote(distance, weight, service_multiplier)
 
-    print(f"Distance (km): {distance}")
-    print(f"Weight (kg): {weight}")
-    print(f"Service code: {service_code}")
-
-    clear()
-
     print(f"Delivery Quote: {quote:.2f} SEK")
 
 # Task 4
@@ -242,25 +187,20 @@ def consolidate_delivery_quote(distance, weight, service_code):
 # 2. GB-220
 # 3. SE-011
 # Total unique parcels: 3
-
-def consolidate_parcel_labels(label):
-
-    clear()
-
-    scanned_labels = label
+def consolidate_parcel_labels(labels):
     unique_labels = []
-    for word in label.upper().split():
-        clean_word = word.strip(",")
+
+    for word in labels.upper().split(","):
+        clean_word = word.strip()
         if clean_word not in unique_labels:
             unique_labels.append(clean_word)
-    print(f"label: {label}")
-    clear()
-    print(f"scanned labels: {scanned_labels}")
+
     print("Unique load list:")
+    
     i = 0
     while len(unique_labels) > i:
         print(f"{i+1}: {unique_labels[i]}")
-        i +=1
+        i += 1
     print(f"Total unique parcels: {len(unique_labels)}")
 
 # TASK 5
@@ -273,11 +213,7 @@ def consolidate_parcel_labels(label):
 # Accepted parcels: 3
 # Loaded weight: 95.00 kg
 # Remaining capacity: 5.00 kg
-
 def check_van_capacity(van_cap, parecel_weights):
-
-    clear()
-
     parecel_status = []
     i = 0
     free_weight = van_cap
@@ -295,13 +231,6 @@ def check_van_capacity(van_cap, parecel_weights):
     for x in parecel_status:
         if x == True:
             accepted_parcels += 1
-
-    clear()
-
-    print(f"Van capacity (kg): {van_cap}")
-    print(f"Parcel weights (kg): {parecel_weights}")
-
-    clear()
 
     i = 0
     while i < len(parecel_status):
@@ -328,9 +257,6 @@ def check_van_capacity(van_cap, parecel_weights):
 # status (string): A description of the shippment status
 #   (e.i minor or major delay or on time, but most importantly "servide failure" if one of the parcels is damaged).
 def classify_service_performance(promised_minutes, actual_minutes, damaged_parcels):
-
-    clear()
-
     delay = actual_minutes - promised_minutes
 
     if damaged_parcels > 0:
@@ -346,16 +272,12 @@ def classify_service_performance(promised_minutes, actual_minutes, damaged_parce
 
 #TASK 7
 def weekly_report(deliveries, target):
-
-    clear()
-
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
     total = 0
     for delivery in deliveries:
         total += delivery
     average = total / 7
-
 
     highest_delivery = deliveries[0]
     highest_day = days[0]
@@ -374,12 +296,8 @@ def weekly_report(deliveries, target):
         if delivery >= target:
             days_meeting_target += 1
 
-
-    print(f"Completed deliveries: {deliveries}")
-    print(f"Daily target: {target}")
-
-    clear()
-
+    # print(f"Completed deliveries: {deliveries}")
+    # print(f"Daily target: {target}")
     print("WEEKLY DISPATCH REPORT")
     print(f"Total deliveries: {total}")
     print(f"Average per day: {average:.2f}")
@@ -400,11 +318,7 @@ def weekly_report(deliveries, target):
 #Keep the printed order Standard, Express, Priority.
 #Format every price with exactly two decimal places
 #After Task 8 is implemented, validate distance and weight before calculating.
-
 def compare_delivery_scenarios(distance, weight):
-
-    clear()
-
     standard = calculate_delivery_quote(distance, weight, 1)
     express = calculate_delivery_quote(distance, weight, 1.25)
     priority = calculate_delivery_quote(distance, weight, 1.6)
@@ -417,22 +331,12 @@ def compare_delivery_scenarios(distance, weight):
         priority: "Priority",
     }
 
-
-    print(f"Distance (km): {distance}")
-    print(f"Weight (kg): {weight}")
-
-    clear()
-
     print("SERVICE COMPARISON")
     print(f"Standard: {standard:.2f} SEK")
     print(f"Express: {express:.2f} SEK")
     print(f"Priority: {priority:.2f} SEK")
     print(f"Cheapest Service: {services[cheap]}")
     print(f"Most Expensive Service: {services[expensive]}")
-
-
-
-
 
 if __name__ == "__main__":
     main()
