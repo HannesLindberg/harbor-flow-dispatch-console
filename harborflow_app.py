@@ -158,7 +158,7 @@ def validate_reference(reference):
 # Give sales staff a consistent quote before they promise a price to a customer.
 #
 # distance (float):
-# wight (float):
+# weight (float):
 # service_code (string): either "S", "X" or "P"
 #
 # Prints the delivery quote
