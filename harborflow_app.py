@@ -255,7 +255,7 @@ def check_van_capacity(van_cap, parecel_weights):
 # RETURNS
 # delay (float): The delay in minutes.
 # status (string): A description of the shippment status
-#   (e.i minor or major delay or on time, but most importantly "servide failure" if one of the parcels is damaged).
+# (e.i minor or major delay or on time, but most importantly "servide failure" if one of the parcels is damaged).
 def classify_service_performance(promised_minutes, actual_minutes, damaged_parcels):
     delay = actual_minutes - promised_minutes
 
@@ -304,18 +304,18 @@ def weekly_report(deliveries, target):
     print(f"Days meeting target: {days_meeting_target}")
 
 
-#Task 9
-#Compare delivery scenarios
-
-#Reuse your quote calculation function to calculate all three service prices
-#Print each option and identify the cheapest and most expensive service
-
-#Technical expectations
-#Do not copy the quote formula three times.
-#A single calculation function must accept the service code or multiplier.
-#Keep the printed order Standard, Express, Priority.
-#Format every price with exactly two decimal places
-#After Task 8 is implemented, validate distance and weight before calculating.
+# Task 9
+# Compare delivery scenarios
+ 
+# Reuse your quote calculation function to calculate all three service prices
+# Print each option and identify the cheapest and most expensive service
+ 
+# Technical expectations
+# Do not copy the quote formula three times.
+# A single calculation function must accept the service code or multiplier.
+# Keep the printed order Standard, Express, Priority.
+# Format every price with exactly two decimal places
+# After Task 8 is implemented, validate distance and weight before calculating.
 def compare_delivery_scenarios(distance, weight):
     standard = calculate_delivery_quote(distance, weight, 1)
     express = calculate_delivery_quote(distance, weight, 1.25)

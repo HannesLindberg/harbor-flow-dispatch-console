@@ -11,6 +11,7 @@ Name: Hannes Lindberg
 Contribution:
 - Task 1
 - Task 6
+- Refactor code
 
 Name: Hugo Karlsson
 Contribution:
@@ -31,18 +32,20 @@ Contribution:
 Design notes
 ------------
 - Used clear() function to make the UI clean. 
-- Also used if statement to make clear() function cross-platform for windows, mac and linux
 
 Main function boundaries:
+- No outputs not used. Most functions only print the result so the data can't be further used.
 
 How input validation is organized:
-- Used while loop for easy validations and try-except loop for complex validations
-- Put validation loop inside the cases so after every invalid input, just the effected part will be repeat.
+- The validation checks the input with desired parameters and, if not valid, prints an error message and prompts the user again.
+- Functions get_number() and get_number_list() are used to get inputs throughout the codebase. 
+  The functions have integrated validation and can be adapted as wanted by changing the input arguments.
+- Some validation does not have a helper due to the fact that they are only used once. For example: the validation for 
+  service codes in task 3 is only used once and there is no need at the moment to make a helper function.
 
 How shared calculations are reused:
-- Created a calculation function called "calculate_delivery_quote".
-- Reused it to calculate the quote variable in Task 3.
-- Reused it to calculate the standard, express, and priority variables in Task 9.
+- Calculation function for delivery quote calculate_delivery_quote() used in multiple tasks.
+- Input functions get_number() and get_number_list() used for most input.
 
 Known limitations
 -----------------
