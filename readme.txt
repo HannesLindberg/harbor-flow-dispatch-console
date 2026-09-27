@@ -24,17 +24,16 @@ Contribution:
 - Task 3
 - Task 7
 
-Nam: Aytunch Tuzdzhu
+Name: Aytunch Tuzdzhu
 Contribution:
 - Task 8
 - Task 9
 
 Design notes
 ------------
-- Used clear() function to make the UI clean. 
-
 Main function boundaries:
 - No outputs not used. Most functions only print the result so the data can't be further used.
+- Used clear() function to make the UI clean. Though this cuts off the logs of previous commands.
 
 How input validation is organized:
 - The validation checks the input with desired parameters and, if not valid, prints an error message and prompts the user again.
@@ -49,12 +48,13 @@ How shared calculations are reused:
 
 Known limitations
 -----------------
-There are no Limitations.
+- The program has a problem with error messages. For the functions get_number() and get_number_list(), you can type in an error message
+  but it won't change depending on what actually makes the error. For example:
 
-What we have done on Task 8:
-- added try-except loop for service selecting part (Line 45-51)
-- added while loop in Case 3 (Line 42-58)
-- added while and try-except loop in Case 5 (Line 61-84)
-- added while loop in case 6 (Line 84-104)
-- added while loop in case 7 (Line 104-124)
-- added while loop in case 8 (Line 200-219)
+    damaged_parcels =  get_number("Damaged parcels: ", "Error - Value must be greater than zero.", int)
+    
+    Damaged parcels: 3.4
+    -> Error - Value must be greater than zero. # Not the right error message since 3.4 > 0. The actual problem is that it's not an integer.
+
+- The biggest limitation is that the data is not being used for anything. It's being printed but then cleared. 
+  So if you wanted to save the data you'd have to write it down before proceeding.
