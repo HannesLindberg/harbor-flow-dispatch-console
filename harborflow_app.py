@@ -8,7 +8,6 @@ entry point so the file can be run with: python harborflow_app.py
 
 import math
 
-
 def get_number(prompt, error_message="Invalid input", cast=float, min_value=0, max_value=math.inf):
     """Keep asking until the user enters something that converts with `cast`
     and is >= min_value. Never crashes on bad input."""
@@ -70,7 +69,6 @@ def main():
         8. Compare service scenarios
         Select service: """, "Error - Select a service from 1 to 8.", int, 1, 8)
 
-        clear()
         print(f"{program_id}.")
 
         match program_id:
