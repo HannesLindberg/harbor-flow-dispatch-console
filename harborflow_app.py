@@ -8,13 +8,6 @@ entry point so the file can be run with: python harborflow_app.py
 
 import math
 
-#To clear unnecessary parts. (looks cleaner)
-def clear():
-    import os
-    if os.name == "nt":
-        os.system("cls")
-    else:
-        os.system("clear")
 
 def get_number(prompt, error_message="Invalid input", cast=float, min_value=0, max_value=math.inf):
     """Keep asking until the user enters something that converts with `cast`
